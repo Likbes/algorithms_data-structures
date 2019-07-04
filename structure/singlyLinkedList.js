@@ -5,10 +5,6 @@ class Node {
   }
 }
 
-// const first = new Node('Hi');
-// first.next = new Node('there');
-// first.next.next = new Node('man');
-
 class SinglyLinkedList {
   constructor() {
     this.head = null;
@@ -128,9 +124,9 @@ class SinglyLinkedList {
     if (position === 0) return this.shift();
 
     const removedNode = this.get(position);
-    const nodeBeforeInsert = this.get(position - 1);
+    const nodeBeforeRemoved = this.get(position - 1);
     // just jumped through necessary node
-    nodeBeforeInsert.next = removed.next;
+    nodeBeforeRemoved.next = removed.next;
 
     this.length--;
     return removedNode;
