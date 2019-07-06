@@ -69,6 +69,74 @@ class BinarySearchTree {
       }
     };
   }
+
+  breadthFirstSearch() {
+    const queueOfData = [];
+    const visitedData = [];
+
+    let currentNode = this.root;
+    // infinity loop
+    do {
+      let leftNode = currentNode.left;
+      let rightNode = currentNode.right;
+
+      if (leftNode !== null) queueOfData.push(leftNode);
+      if (rightNode !== null) queueOfData.push(rightNode);
+
+      visitedData.push(currentNode.value);
+      currentNode = queueOfData.shift();
+    } while (queueOfData.length);
+
+    return visitedData;
+  }
+
+  depthFirstPreOrder() {
+    const visitedNodes = [];
+    let currentNode = this.root;
+
+    const travers = (node, visitedNodes) => {
+
+      visitedNodes.push(node.value);
+      if (node.left) travers(node.left, visitedNodes);
+      if (node.right) travers(node.right, visitedNodes);
+
+      return visitedNodes;
+    };
+
+    return travers(currentNode, visitedNodes);
+  }
+
+  depthFirstPostOrder() {
+    const visitedNodes = [];
+    let currentNode = this.root;
+
+    const travers = (node, visitedNodes) => {
+
+      if (node.left) travers(node.left, visitedNodes);
+      if (node.right) travers(node.right, visitedNodes);
+
+      visitedNodes.push(node.value);
+      return visitedNodes;
+    };
+
+    return travers(currentNode, visitedNodes);
+  }
+
+  depthFirstInOrder() {
+    const visitedNodes = [];
+    let currentNode = this.root;
+
+    const travers = (node, visitedNodes) => {
+
+      if (node.left) travers(node.left, visitedNodes);
+      visitedNodes.push(node.value);
+      if (node.right) travers(node.right, visitedNodes);
+
+      return visitedNodes;
+    };
+
+    return travers(currentNode, visitedNodes);
+  }
 }
 
 const BST = new BinarySearchTree();
@@ -83,4 +151,4 @@ BST
   .insert(12);
 
 
-console.log(BST.find(6));
+console.log(BST.depthFirstInOrder());
