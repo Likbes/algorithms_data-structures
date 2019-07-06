@@ -62,7 +62,7 @@ class MaxBinaryHeap {
       }
 
       // just lift a right value to root
-      if (rightIdx > currentValue && rightIdx < length) {
+      if (rightValue > currentValue && rightIdx < length) {
         currentValueIdx =
           this.swap(currentValueIdx, currentValue, rightIdx, rightValue);
 
