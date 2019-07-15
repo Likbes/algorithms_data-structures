@@ -13,7 +13,7 @@ interface HeightfulShape {
 type ShapeRect = Shape & WidthfulShape & HeightfulShape;
 type ShapeSide = 'width' | 'height';
 
-class Rect {
+class Rect implements ShapeRect {
   width: number = 0;
   height: number = 0;
 
