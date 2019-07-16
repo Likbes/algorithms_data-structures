@@ -1,54 +1,56 @@
-interface Product {
-  operation(): string;
-}
-
-abstract class Creator {
-  public abstract factoryMethod(): Product;
-
-  public someOperation(): string {
-    // choose factory method to get object-product
-    const product = this.factoryMethod();
-    return `Creator: worked with ${product.operation()}`;
+namespace Factory {
+  interface Product {
+    operation(): string;
   }
-}
 
-/*
- * Specific Creators override the factory method in order
- * to change the type of the resulting product.
- */
+  abstract class Creator {
+    public abstract factoryMethod(): Product;
 
-class FirstConcreteCreator extends Creator {
-  public factoryMethod(): Product {
-    return new FirstConcreteProduct();
+    public someOperation(): string {
+      // choose factory method to get object-product
+      const product = this.factoryMethod();
+      return `Creator: worked with ${product.operation()}`;
+    }
   }
-}
 
-class SecondConcreteCreator extends Creator {
-  public factoryMethod(): Product {
-    return new SecondConcreteProduct();
+  /*
+   * Specific Creators override the factory method in order
+   * to change the type of the resulting product.
+   */
+
+  class FirstConcreteCreator extends Creator {
+    public factoryMethod(): Product {
+      return new FirstConcreteProduct();
+    }
   }
-}
 
-/*
- * Specific Products provide various Product interface implementations.
- */
-
-class FirstConcreteProduct implements Product {
-  operation(): string {
-    return `FirstConcreteProduct`;
+  class SecondConcreteCreator extends Creator {
+    public factoryMethod(): Product {
+      return new SecondConcreteProduct();
+    }
   }
-}
 
-class SecondConcreteProduct implements Product {
-  operation(): string {
-    return `SecondConcreteProduct`;
+  /*
+   * Specific Products provide various Product interface implementations.
+   */
+
+  class FirstConcreteProduct implements Product {
+    operation(): string {
+      return `FirstConcreteProduct`;
+    }
   }
-}
 
-function code(creator: Creator) {
-  console.log('i dont know creators class');
-  console.log(creator.someOperation());
-}
+  class SecondConcreteProduct implements Product {
+    operation(): string {
+      return `SecondConcreteProduct`;
+    }
+  }
 
-code(new FirstConcreteCreator());
-code(new SecondConcreteCreator());
+  function code(creator: Creator) {
+    console.log('i dont know creators class');
+    console.log(creator.someOperation());
+  }
+
+  code(new FirstConcreteCreator());
+  code(new SecondConcreteCreator());
+}
