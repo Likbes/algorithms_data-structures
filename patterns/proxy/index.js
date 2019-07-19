@@ -61,18 +61,25 @@ var RequestClient = /** @class */ (function () {
     };
     return RequestClient;
 }());
+// proxy with modified behavior
 var LoggedRequest = /** @class */ (function () {
     function LoggedRequest(loggee) {
         this.loggee = loggee;
     }
+    LoggedRequest.prototype.checkAccess = function () {
+        console.log('proxy check access');
+        return true;
+    };
     LoggedRequest.prototype.request = function (url) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (!this.checkAccess()) return [3 /*break*/, 2];
                         console.log("Performed request to " + url);
                         return [4 /*yield*/, this.loggee.request(url)];
                     case 1: return [2 /*return*/, _a.sent()];
+                    case 2: return [2 /*return*/];
                 }
             });
         });
