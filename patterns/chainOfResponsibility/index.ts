@@ -2,11 +2,13 @@ namespace CoR {
   interface Handler {
     setNext(handler: Handler): Handler;
 
-    handle(request: string): string | null;
+    handle(request: string): handleResponse;
   }
 
+  type handleResponse = string | null;
+
   abstract class AbstractHandler implements Handler {
-    private nextHandler: Handler;
+    private nextHandler?: Handler;
 
     public setNext(handler: Handler): Handler {
       this.nextHandler = handler;
@@ -14,7 +16,7 @@ namespace CoR {
       return handler;
     }
 
-    public handle(request: string): string | null {
+    public handle(request: string): handleResponse {
       return this.nextHandler ? this.nextHandler.handle(request) : null;
     }
   }
@@ -22,16 +24,17 @@ namespace CoR {
   // all concrete classes either handle request
   // or give it to next
   class MonkeyHandler extends AbstractHandler {
-    public handle(request: string): string {
+    public handle(request: string): handleResponse {
       if (request === 'Banana') {
         return `Monkey: I'll eat the ${request}.`;
       }
+
       return super.handle(request);
     }
   }
 
   class SquirrelHandler extends AbstractHandler {
-    public handle(request: string): string {
+    public handle(request: string): handleResponse {
       if (request === 'Nut') {
         return `Squirrel: I'll eat the ${request}.`;
       }
@@ -40,7 +43,7 @@ namespace CoR {
   }
 
   class DogHandler extends AbstractHandler {
-    public handle(request: string): string {
+    public handle(request: string): handleResponse {
       if (request === 'MeatBall') {
         return `Dog: I'll eat the ${request}.`;
       }
@@ -66,9 +69,9 @@ namespace CoR {
 
   monkey.setNext(squirrel).setNext(dog);
 
-  console.log('chain monket -> squirrel -> dog');
+  console.log('chain: monket -> squirrel -> dog');
   client(monkey);
   console.log('\n');
-  console.log('subchain squirrel -> dog');
+  console.log('subchain: squirrel -> dog');
   client(squirrel);
 }
