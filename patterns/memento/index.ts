@@ -59,6 +59,7 @@ namespace Memento {
     }
   }
 
+  // command pattern to help
   class Command {
     private backup?: Snapshot;
 

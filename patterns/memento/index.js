@@ -36,6 +36,7 @@ var Memento;
         };
         return Snapshot;
     }());
+    // command pattern to help
     var Command = /** @class */ (function () {
         function Command() {
         }
