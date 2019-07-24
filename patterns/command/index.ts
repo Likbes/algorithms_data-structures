@@ -1,4 +1,4 @@
-namespace Command {
+namespace CommandPattern {
   interface Command {
     execute(): void;
   }

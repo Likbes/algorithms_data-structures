@@ -1,6 +1,6 @@
 "use strict";
-var Command;
-(function (Command) {
+var CommandPattern;
+(function (CommandPattern) {
     // concrete commands
     var SimpleCommand = /** @class */ (function () {
         function SimpleCommand(payload) {
@@ -67,4 +67,4 @@ var Command;
     var receiver = new Receiver();
     invoker.setOnFinish(new ComplexCommand(receiver, 'Send email', 'Save report'));
     invoker.doSomethingImportant();
-})(Command || (Command = {}));
+})(CommandPattern || (CommandPattern = {}));
